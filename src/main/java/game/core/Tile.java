@@ -37,6 +37,15 @@ public class Tile {
         return nodes.get(directionToNeighbour).type == neighbourTile.getNodes().get(directionToNeighbour.opposite()).type;
     }
 
+    public void connectTo(Tile neighbourTile) {
+        Direction directionToNeighbour = position.directionTo(neighbourTile.getPosition());
+        Node thisNode = nodes.get(directionToNeighbour);
+        Node neighbourNode = neighbourTile.nodes.get(directionToNeighbour.opposite());
+
+        thisNode.addNeighbours(neighbourNode);
+        neighbourNode.addNeighbours(thisNode);
+    }
+
     public Vector getPosition() {
         return position;
     }
